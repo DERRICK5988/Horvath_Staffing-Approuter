@@ -1,0 +1,29 @@
+ID: Horvath-Staffing-Access
+_schema-version: "3.1"
+version: 1.0.2
+ 
+modules:
+  - name: Horvath-Staffing-approuter
+    type: approuter.nodejs
+    path: approuter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+      stack: cflinuxfs4
+    requires:
+      - name: buildapps40693-html5-apps-repo-runtime
+      - name: buildapps40693-destination
+      - name: buildapps40693-uaa
+ 
+resources:
+  - name: buildapps40693-html5-apps-repo
+    type: org.cloudfoundry.existing-service
+  - name: buildapps40693-html5-apps-repo-runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: buildapps40693-destination
+    type: org.cloudfoundry.existing-service
+  - name: buildapps40693-uaa
+    type: org.cloudfoundry.existing-service
